@@ -1,5 +1,6 @@
 const gameBoard = (() => {
-  const matrix = new Array(9).fill(0);
+  // const matrix = new Array(9).fill(0);
+  const matrix = ['X', 'O', 'X', 0, 0, 0, 0, 0, 0] // testing out
   const getMatrix = () => matrix;
   const setCell = (cell, symbol) => {
 
@@ -58,16 +59,19 @@ const game = (() => {
 
 const displayController = (() => {
   const render = () => {
-    for (let i = 0; i < matrix.length; i++){
-      const boardPosition = document.querySelector('#cell${i + 1}');
-      if (boardPosition[i] === "X") {
-        boardPosition.style.color = "#00C"
+    for (let i = 0; i < 9; i++){
+      if (gameBoard.getMatrix()[i] === "X") {
+        document.getElementById(`cell${i}`).innerHTML = "X"
+        document.querySelector(`#cell${i}`).style.color = "red"
+      }else if (gameBoard.getMatrix()[i] === "O") {
+        document.getElementById(`cell${i}`).innerHTML = "O"
+        document.querySelector(`#cell${i}`).style.color = "blue"
       }else {
-        boardPosition.style.color = "#C00"
+        // show nothing
       }
-      boardPosition.innerHTML = '${boardPosition[i]}'
     }
   }
+  return render()
 
 
 })()
@@ -78,3 +82,6 @@ const Player = (name, symbol) => {
 
 let player1 = Player('Player 1', 'X');
 let player2 = Player('Player 2', 'O');
+
+
+displayController
