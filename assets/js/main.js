@@ -58,7 +58,15 @@ const game = (() => {
 
 const displayController = (() => {
   const render = () => {
-
+    for (let i = 0; i < matrix.length; i++){
+      const boardPosition = document.querySelector('#cell${i + 1}');
+      if (boardPosition[i] === "X") {
+        boardPosition.style.color = "#00C"
+      }else {
+        boardPosition.style.color = "#C00"
+      }
+      boardPosition.innerHTML = '${boardPosition[i]}'
+    }
   }
 
 
