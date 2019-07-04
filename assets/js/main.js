@@ -8,7 +8,8 @@ function addPlayers(player1, player2){
   // put new players into players array
   players = [
     player1,
-    player2];
+    player2,
+  ];
   modal.classList.remove("show");
   modal.classList.add("hidden");
   displayController.render();
@@ -115,7 +116,7 @@ const displayController = (() => {
         cell.innerHTML = "";
         cell.classList.remove("disabled", "o-color", "x-color");
         cell.addEventListener("click", _playgame, false)
-      }
+      };
       status.classList.remove("success", "tie");
       status.classList.add("hidden");
     };
@@ -156,8 +157,8 @@ const displayController = (() => {
     }else if(game.isTie()){
       _gameOver();
       status.classList.remove("hidden");
-      status.innerHTML = "The game is a tie"
-      status.classList.add("tie")
+      status.innerHTML = "The game is a tie";
+      status.classList.add("tie");
     }else{
       game.setCurrentPlayer();
     }
@@ -172,7 +173,9 @@ const displayController = (() => {
     }
   };
 
-  return { render };
+  return { 
+    render,
+  };
 })();
 
 // modal scripts
