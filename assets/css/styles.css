@@ -29,14 +29,24 @@
 .disabled{
     background-color: rgba(0, 0, 0, 0.2);
     color: grey;
+    cursor: not-allowed;
 }
 .status{
     text-align: center;
     padding: 10px;
+    font-size: 1.5em;
 }
 
 .reset{
     margin-top: 10px;
     padding: 20px;
     text-align: center
+}
+
+.x-color{
+    color: red;
+}
+
+.o-color{
+    color: blue;
 }
