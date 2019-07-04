@@ -1,9 +1,32 @@
+/* global document */
+let close_modal = document.getElementsByClassName("close")[0];
+let modal = document.getElementById("modal");
+let open_modal = document.getElementById("new_btn");
+let players = []
+
+function addPlayers(player1, player2){
+  // put new players into players array
+  players = [player1, player2];
+  modal.classList.remove("show");
+  modal.classList.add("hidden");
+  displayController.render();
+}
+
+document.getElementById("add-players").addEventListener("submit", (e)=> {
+  e.preventDefault();
+  // get player names
+  p1 = document.getElementById("player1").value;
+  p2 = document.getElementById("player2").value;
+  addPlayers(p1, p2);
+});
+
+
 const Player = (name, symbol) => {
   return {name, symbol};
 }
 
-let player1 = Player('Player 1',  'X');
-let player2 = Player('Player 2', 'O');
+const player1 = () => Player(players[0],  'X');
+const player2 = () => Player(players[1],  'O');
 
 const gameBoard = (() => {
   const matrix = new Array(9).fill(0);
@@ -54,9 +77,9 @@ const game = (() => {
 
   const getCurrentPlayer = () => {
     if(turns % 2 === 0){
-      currentPlayer = player1;
+      currentPlayer = player1();
     }else{
-      currentPlayer = player2;
+      currentPlayer = player2();
     }
     return currentPlayer;
   }
@@ -88,6 +111,8 @@ const displayController = (() => {
         cell.classList.remove('disabled', 'o-color', 'x-color');
         cell.addEventListener("click", _playgame, false)
       }
+      status.classList.remove('success', 'tie')
+      status.classList.add('hidden');
     }
 
     document.getElementById("reset_btn").addEventListener("click", () => {
@@ -111,7 +136,7 @@ const displayController = (() => {
     let box = document.getElementById(cell.target.id);
     if(gameBoard.isAvailable(cell.target.id)){
       gameBoard.setCell(cell.target.id, currentPlayer.symbol)
-      box.classList.add(game.getCurrentPlayer() === player1 ? "x-color" : "o-color");
+      box.classList.add(game.getCurrentPlayer().symbol === player1().symbol ? "x-color" : "o-color");
       box.innerHTML = currentPlayer.symbol;
     }
   }
@@ -120,12 +145,14 @@ const displayController = (() => {
     let currentPlayer = game.getCurrentPlayer();
     if(game.gameWon()){
       status.classList.remove('hidden');
-      status.innerHTML = `${currentPlayer.name} has won the game`;
+      status.innerHTML = `${currentPlayer.name} has won the game!`;
+      status.classList.add("success");
       _gameOver();
     }else if(game.isTie()){
       _gameOver();
       status.classList.remove('hidden');
       status.innerHTML = "The game is a tie"
+      status.classList.add("tie")
     }else{
       game.setCurrentPlayer();
     }
@@ -143,4 +170,19 @@ const displayController = (() => {
   return { render };
 })()
 
-displayController.render();
+// modal scripts
+window.onload = function() {
+  if (modal.classList.value === "hidden") {
+    modal.classList.remove("hidden");
+    modal.classList.add("show");
+  }
+};
+
+open_modal.addEventListener("click", () => {
+  if (modal.classList.value === "hidden") {
+      modal.classList.remove("hidden");
+      modal.classList.add("show");
+      gameBoard.reset()
+      game.resetTurns();
+  }
+});
