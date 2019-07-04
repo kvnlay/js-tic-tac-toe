@@ -67,6 +67,7 @@ const displayController = (() => {
         document.querySelector(`#cell${i}`).style.color = "blue"
       }else {
         // show nothing
+        document.getElementById(`cell${i}`).innerHTML = ""
       }
     }
     let turns = 0;
@@ -85,10 +86,15 @@ const displayController = (() => {
         } else {
           // do nothing
         }
-      })
+      });
     }
+    document.getElementById("reset_btn").addEventListener("click", () => {
+      turns = 0;
+      gameBoard.reset();
+      render();
+      
+    });
   }
-  
   
   return render()
 
