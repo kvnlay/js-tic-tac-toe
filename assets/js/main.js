@@ -115,8 +115,8 @@ const displayController = (() => {
       for(let cell of cells){
         cell.innerHTML = "";
         cell.classList.remove("disabled", "o-color", "x-color");
-        cell.addEventListener("click", _playgame, false)
-      };
+        cell.addEventListener("click", _playgame, false);
+      }
       status.classList.remove("success", "tie");
       status.classList.add("hidden");
     };
