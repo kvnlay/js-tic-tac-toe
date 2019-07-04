@@ -26,6 +26,10 @@
     font-weight: bolder;
 }
 
+.disabled{
+    background-color: rgba(0, 0, 0, 0.2);
+    color: grey;
+}
 .status{
     text-align: center;
     padding: 10px;

@@ -1,8 +1,14 @@
+const Player = (name, symbol) => {
+  return {name, symbol};
+}
+
+let player1 = Player('Player 1',  'X');
+let player2 = Player('Player 2', 'O');
+
 const gameBoard = (() => {
   const matrix = new Array(9).fill(0);
   const getMatrix = () => matrix;
   const setCell = (cell, symbol) => {
-
     matrix[cell] = symbol;
   }
   const getCell = (cell) => matrix[cell];
@@ -20,15 +26,15 @@ const gameBoard = (() => {
 })()
 
 const game = (() => {
-  const currentPlayer = undefined;
-  const turns = 0;
+  let currentPlayer = undefined;
+  let turns = 0;
   const winningCombinations = [
     [0,1,2], [3,4,5], [6,7,8], [0,3,6],
     [0,4,8], [1,4,7], [2,4,6], [2,5,8]
   ];
 
   const gameWon = () => {
-    for(comb of winningCombinations){
+    for(let comb of winningCombinations){
       let i = 0;
       let arr = gameBoard.getMatrix();
       if(arr[comb[i]] != 0){
@@ -44,37 +50,51 @@ const game = (() => {
 
   const gameOver = () => gameWon || isTie;
 
-  const getCurrentPlayer = () => (turns % 2 === 0)? currentPlayer = player1 : player2;
-  
-  const increaseTurn = () => turn++;
+  const getCurrentPlayer = () => {
+    if(turns % 2 === 0){
+      currentPlayer = player1;
+    }else{
+      currentPlayer = player2;
+    }
+    return currentPlayer;
+  }
+
+  const setCurrentPlayer = () => {
+    turns++;
+  }
+
   return {
     gameWon,
     isTie,
     gameOver,
     getCurrentPlayer,
-    increaseTurn
+    setCurrentPlayer
   }
 })()
 
 const displayController = (() => {
+  const cells = document.querySelectorAll('.cell');
   const render = () => {
-    for (let i = 0; i < matrix.length; i++){
-      const boardPosition = document.querySelector('#cell${i + 1}');
-      if (boardPosition[i] === "X") {
-        boardPosition.style.color = "#00C"
-      }else {
-        boardPosition.style.color = "#C00"
-      }
-      boardPosition.innerHTML = '${boardPosition[i]}'
+    for(let cell of cells){
+      cell.innerHTML = '';
+      cell.addEventListener("click", (e) => {
+        _markCell(e);
+        game.setCurrentPlayer();
+        e.target.classList.add('disabled');
+      })
     }
   }
 
-
+  
+  const _markCell = (cell) => {
+    let currentPlayer = game.getCurrentPlayer();
+    let box = document.getElementById(cell.target.id);
+    if(gameBoard.isAvailable(cell.target.id)){
+      gameBoard.setCell(cell.target.id, currentPlayer.symbol)
+      box.innerHTML = currentPlayer.symbol;
+    }
+  }
+  return { render };
 })()
 
-const Player = (name, symbol) => {
-  return {name, symbol};
-}
-
-let player1 = Player('Player 1', 'X');
-let player2 = Player('Player 2', 'O');
+displayController.render();
