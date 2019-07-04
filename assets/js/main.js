@@ -1,6 +1,5 @@
 const Player = (name, symbol) => {
-  const setPlayerName = (name) => name = name;
-  return {name, symbol, setPlayerName};
+  return {name, symbol};
 }
 
 let player1 = Player('Player 1',  'X');
