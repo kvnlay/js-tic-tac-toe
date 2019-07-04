@@ -1,6 +1,5 @@
 const gameBoard = (() => {
-  // const matrix = new Array(9).fill(0);
-  const matrix = ['X', 'O', 'X', 0, 0, 0, 0, 0, 0] // testing out
+  const matrix = new Array(9).fill(0);
   const getMatrix = () => matrix;
   const setCell = (cell, symbol) => {
 
@@ -70,7 +69,27 @@ const displayController = (() => {
         // show nothing
       }
     }
+    let turns = 0;
+    for (let j = 0; j < 9; j++){
+      document.getElementById(`cell${j}`).addEventListener("click", () => {
+        if (gameBoard.getMatrix()[j] == 0) {
+          if (turns % 2 == 0){
+            gameBoard.setCell(j, 'X')
+            turns ++
+            return render()
+          }else {
+            gameBoard.setCell(j, 'O')
+            turns ++
+            return render()
+          }
+        } else {
+          // do nothing
+        }
+      })
+    }
   }
+  
+  
   return render()
 
 
