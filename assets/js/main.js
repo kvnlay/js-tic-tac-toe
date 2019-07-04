@@ -63,12 +63,15 @@ const game = (() => {
     turns++;
   }
 
+  const resetTurns = () => turns = 0;
+
   return {
     gameWon,
     isTie,
     gameOver,
     getCurrentPlayer,
-    setCurrentPlayer
+    setCurrentPlayer,
+    resetTurns
   }
 })()
 
@@ -83,7 +86,17 @@ const displayController = (() => {
         e.target.classList.add('disabled');
       })
     }
+
+    document.getElementById("reset_btn").addEventListener("click", () => {
+      game.resetTurns();
+      gameBoard.reset();
+      for(let cell of cells){
+        cell.classList.remove('disabled');
+        cell.innerHTML = '';
+      }
+    });
   }
+  
 
   
   const _markCell = (cell) => {
@@ -94,6 +107,7 @@ const displayController = (() => {
       box.innerHTML = currentPlayer.symbol;
     }
   }
+
   return { render };
 })()
 
