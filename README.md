@@ -4,7 +4,7 @@
 
 A Tic-tac-toe game you can play in your browser.
 
-library project from The Odin Project [curriculum](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript)
+Tic-tac-toe project from The Odin Project [curriculum](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript)
 
 ## Contributors
 
