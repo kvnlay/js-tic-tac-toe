@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Document</title>
+</head>
+<body>
+  <header><h1 class="game-title">Tic Tac Toe</h1></header>
+  <main>
+    <div class="status hidden"></div>
+    <div class="board">
+      <div id="0" class="cell"></div>
+      <div id="1" class="cell"></div>
+      <div id="2" class="cell"></div>
+      <div id="3" class="cell"></div>
+      <div id="4" class="cell"></div>
+      <div id="5" class="cell"></div>
+      <div id="6" class="cell"></div>
+      <div id="7" class="cell"></div>
+      <div id="8" class="cell"></div>
+    </div>
+    <div class="reset">
+      <button id="new_btn" class="btn btn-primary">New</button>
+      <button id="reset_btn" class="btn btn-warning">Restart</button>
+    </div>
+    <div id="modal" class="hidden">
+        <div class="form-content">
+            <h3 class="form-heading">Players</h3>
+            <form id="add-players">
+                <input type="text" id="player1" class="player p1" placeholder="Player 1">
+                <input type="text" id="player2" class="player p2" placeholder="Player 2">
+                <input type="submit" value="Add Players" id="add-player">
+            </form>
+        </div>
+    </div>
+  </main>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
